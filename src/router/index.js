@@ -5,10 +5,10 @@ import LoginPage from '../views/admin/LoginPage.vue'
 import RegisterPage from '../views/admin/RegisterPage.vue'
 import BasicLayout from '../layout/BasicLayout.vue'
 import DashboardPage from '../views/dashboard/DashboardPage.vue'
-import UserManagePage from '../views/user/UserManagePage.vue'
 import NodeManagePage from '../views/node/NodeManagePage.vue'
 import ContainerManagePage from '../views/container/ContainerManagePage.vue'
 import LogManagePage from '../views/log/LogManagePage.vue'
+import ScheduleCenterPage from '../views/schedule/ScheduleCenterPage.vue'
 
 const routes = [
     {
@@ -35,16 +35,16 @@ const routes = [
                 component: DashboardPage
             },
             {
-                path: '/user',
-                component: UserManagePage
-            },
-            {
                 path: '/node',
                 component: NodeManagePage
             },
             {
                 path: '/container',
                 component: ContainerManagePage
+            },
+            {
+                path: '/schedule',
+                component: ScheduleCenterPage
             },
             {
                 path: '/log',
@@ -62,7 +62,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     const userStore = useUserStore()
 
-    if (!to.meta?.auth && !(to.matched.some(item => item.meta?.auth))) {
+    if (!to.meta?.auth && !to.matched.some(item => item.meta?.auth)) {
         next()
         return
     }

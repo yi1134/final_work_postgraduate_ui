@@ -19,16 +19,16 @@
             <span>首页仪表盘</span>
           </el-menu-item>
 
-          <el-menu-item index="/user">
-            <span>用户管理</span>
-          </el-menu-item>
-
           <el-menu-item index="/node">
             <span>节点管理</span>
           </el-menu-item>
 
           <el-menu-item index="/container">
             <span>容器管理</span>
+          </el-menu-item>
+
+          <el-menu-item index="/schedule">
+            <span>调度运行中心</span>
           </el-menu-item>
 
           <el-menu-item index="/log">
