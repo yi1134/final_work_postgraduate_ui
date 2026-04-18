@@ -61,7 +61,7 @@ const handleLogin = async () => {
     const res = await adminLogin(form)
     userStore.loginUser = res.data
     ElMessage.success('登录成功')
-    router.push('/home')
+    router.push('/dashboard')
   } catch (e) {}
 }
 

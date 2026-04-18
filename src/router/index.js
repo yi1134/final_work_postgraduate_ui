@@ -3,12 +3,17 @@ import { useUserStore } from '../stores/user'
 
 import LoginPage from '../views/admin/LoginPage.vue'
 import RegisterPage from '../views/admin/RegisterPage.vue'
-import HomePage from '../views/HomePage.vue'
+import BasicLayout from '../layout/BasicLayout.vue'
+import DashboardPage from '../views/dashboard/DashboardPage.vue'
+import UserManagePage from '../views/user/UserManagePage.vue'
+import NodeManagePage from '../views/node/NodeManagePage.vue'
+import ContainerManagePage from '../views/container/ContainerManagePage.vue'
+import LogManagePage from '../views/log/LogManagePage.vue'
 
 const routes = [
     {
         path: '/',
-        redirect: '/home'
+        redirect: '/dashboard'
     },
     {
         path: '/login',
@@ -19,11 +24,33 @@ const routes = [
         component: RegisterPage
     },
     {
-        path: '/home',
-        component: HomePage,
+        path: '/',
+        component: BasicLayout,
         meta: {
             auth: true
-        }
+        },
+        children: [
+            {
+                path: '/dashboard',
+                component: DashboardPage
+            },
+            {
+                path: '/user',
+                component: UserManagePage
+            },
+            {
+                path: '/node',
+                component: NodeManagePage
+            },
+            {
+                path: '/container',
+                component: ContainerManagePage
+            },
+            {
+                path: '/log',
+                component: LogManagePage
+            }
+        ]
     }
 ]
 
@@ -35,7 +62,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     const userStore = useUserStore()
 
-    if (!to.meta?.auth) {
+    if (!to.meta?.auth && !(to.matched.some(item => item.meta?.auth))) {
         next()
         return
     }
